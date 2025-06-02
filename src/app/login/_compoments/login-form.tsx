@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,6 +42,13 @@ export default function LoginForm() {
       password: "",
     },
   });
+
+  const handleGoogleAuth = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
+  };
 
   async function onSubmit(data: z.infer<typeof loginSchema>) {
     await authClient.signIn.email(
@@ -100,7 +107,7 @@ export default function LoginForm() {
               )}
             />
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex flex-col space-y-2">
             <Button
               type="submit"
               className="w-full"
@@ -111,6 +118,15 @@ export default function LoginForm() {
               ) : (
                 "Entrar"
               )}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleAuth}
+              className="w-full"
+            >
+              <Mail className="h-4 w-4" />
+              Login com o Google
             </Button>
           </CardFooter>
         </Card>
