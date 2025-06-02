@@ -23,23 +23,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const registerSchema = z.object({
-  name: z.string().trim().min(1, { message: "Nome é obrigatório" }),
+const loginSchema = z.object({
   email: z.string().email({ message: "E-mail não é válido" }),
   password: z.string().trim().min(8, { message: "A senha é obrigatória" }),
 });
 
-export default function RegisterForm() {
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+export default function LoginForm() {
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof registerSchema>) {
+  function onSubmit(data: z.infer<typeof loginSchema>) {
     console.log(data);
   }
 
@@ -48,23 +46,10 @@ export default function RegisterForm() {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Card>
           <CardHeader>
-            <CardTitle>Criar Conta</CardTitle>
-            <CardDescription>Crie uma conta para continuar</CardDescription>
+            <CardTitle>Login</CardTitle>
+            <CardDescription>Faça o login para acessar</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Digite seu nome.." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="email"
@@ -94,7 +79,7 @@ export default function RegisterForm() {
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full">
-              Criar Conta
+              Entrar
             </Button>
           </CardFooter>
         </Card>
