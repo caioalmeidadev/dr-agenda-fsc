@@ -39,14 +39,12 @@ export const UpsetDoctor = actionClient
   .schema(upsetDoctorSchema)
   .action(async ({ parsedInput }) => {
     const from = dayjs()
-      .utc()
       .day(parsedInput.availableFromWeekDay)
       .set("hour", Number(parsedInput.availableFromTime.split(":")[0]))
       .set("minute", Number(parsedInput.availableFromTime.split(":")[1]))
       .set("second", Number(parsedInput.availableFromTime.split(":")[2] || 0))
       .utc();
     const to = dayjs()
-      .utc()
       .day(parsedInput.availableToWeekDay)
       .set("hour", Number(parsedInput.availableToTime.split(":")[0]))
       .set("minute", Number(parsedInput.availableToTime.split(":")[1]))

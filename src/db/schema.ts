@@ -109,6 +109,7 @@ export const clinicsTableRealtions = relations(clinicsTable, ({ many }) => ({
 
 export const doctorsTable = pgTable("doctors", {
   id: uuid("id").defaultRandom().primaryKey(),
+  name: text("name").notNull(),
   clinicId: uuid("clinic_id")
     .notNull()
     .references(() => clinicsTable.id, { onDelete: "cascade" }),
