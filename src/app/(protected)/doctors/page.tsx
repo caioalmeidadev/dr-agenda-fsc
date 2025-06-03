@@ -11,8 +11,9 @@ import {
   PageHeaderContent,
   PageTitle,
 } from "@/components/page-container";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
+
+import AddDoctorButton from "./_components/add-doctor-button";
 
 export default async function DoctorsPage() {
   const session = await auth.api.getSession({
@@ -29,10 +30,7 @@ export default async function DoctorsPage() {
           <PageDescription>Gerencie os médicos da sua clínica</PageDescription>
         </PageHeaderContent>
         <PageActions>
-          <Button>
-            <Plus className="h-4 w-4" />
-            Adicionar Médico
-          </Button>
+          <AddDoctorButton />
         </PageActions>
       </PageHeader>
       <PageContent>Médicos</PageContent>
