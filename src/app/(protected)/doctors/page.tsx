@@ -1,4 +1,6 @@
 import { Plus } from "lucide-react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import {
   PageActions,
@@ -10,8 +12,15 @@ import {
   PageTitle,
 } from "@/components/page-container";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
 
-export default function DoctorsPage() {
+export default async function DoctorsPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session?.user) {
+    redirect("/login");
+  }
   return (
     <PageContainer>
       <PageHeader>

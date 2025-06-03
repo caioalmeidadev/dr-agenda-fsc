@@ -26,15 +26,17 @@ export const auth = betterAuth({
           clinic: true,
         },
       });
-      const clinic = clinics[0];
+      const clinic = clinics?.[0];
 
       return {
         user: {
           ...user,
-          clinic: {
-            clinicId: clinic.clinicId,
-            name: clinic.clinic.name,
-          },
+          clinic: clinic?.clinicId
+            ? {
+                clinicId: clinic?.clinicId,
+                name: clinic?.clinic.name,
+              }
+            : undefined,
         },
         session,
       };
