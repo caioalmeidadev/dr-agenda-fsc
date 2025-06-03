@@ -1,6 +1,7 @@
 "use server";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { z } from "zod";
 
@@ -74,4 +75,6 @@ export const UpsetDoctor = actionClient
         target: [doctorsTable.id],
         set: { ...parsedInput },
       });
+
+    revalidatePath("/doctors");
   });
