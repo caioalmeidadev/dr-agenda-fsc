@@ -1,9 +1,5 @@
 export function PageContainer({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="space-y-6 p-6" w-full>
-      {children}
-    </div>
-  );
+  return <div className="w-full space-y-6 p-6">{children}</div>;
 }
 
 export function PageHeader({ children }: { children: React.ReactNode }) {
