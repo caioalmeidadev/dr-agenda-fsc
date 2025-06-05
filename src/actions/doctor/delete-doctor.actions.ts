@@ -27,7 +27,7 @@ export const deleteDoctor = actionClient
       throw new Error("Médico não encontrado");
     }
 
-    if (doctor.clinicId !== session.user.clinic?.clinicId) {
+    if (doctor.clinicId !== session.user.clinic?.id) {
       throw new Error("Médico não encontrado");
     }
 

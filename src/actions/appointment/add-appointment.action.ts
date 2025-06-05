@@ -21,7 +21,7 @@ export const addAppointment = actionClient
     if (!session?.user) {
       throw new Error("Unauthorized");
     }
-    if (!session?.user.clinic?.clinicId) {
+    if (!session?.user.clinic?.id) {
       throw new Error("Clinic not found");
     }
     const availableTimes = await getAvailableTimes({
@@ -44,7 +44,7 @@ export const addAppointment = actionClient
 
     await db.insert(appointmentsTable).values({
       ...parsedInput,
-      clinicId: session?.user.clinic?.clinicId,
+      clinicId: session?.user.clinic?.id,
       date: appointmentDateTime,
     });
 
